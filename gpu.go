@@ -95,5 +95,21 @@ func main() {
 			}
 		}
 		fmt.Println("----------------------------------------")
+
+		// Print detailed device information
+		fmt.Printf("\nDetailed GPU Device Information (%s):\n", time.Now().Format("15:04:05"))
+		for _, device := range response.Devices {
+			fmt.Printf("Device ID: %s\n", device.ID)
+			fmt.Printf("Health: %s\n", device.Health)
+			if device.Topology != nil {
+				for _, node := range device.Topology.Nodes {
+					fmt.Printf("NUMA Node ID: %d\n", node.ID)
+				}
+			}
+			fmt.Println("-----------------------------")
+		}
+
+		// Print raw output of all data
+		fmt.Printf("\nRaw Output:\n%+v\n", response)
 	}
 }
